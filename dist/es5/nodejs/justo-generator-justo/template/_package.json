@@ -1,0 +1,29 @@
+{
+  "name": "${dir.name}",
+  "version": "0.1.0",
+  "description": "${scope.desc}",
+  "homepage": "",
+  "author": {
+    "name": "${scope.author}",
+    "email": "${scope.authorEmail}",
+    "url": "${scope.authorUrl}"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "",
+    "email": ""
+  },
+  "engines": {
+    "node": ">=5.0.0",
+    "npm": ">=3.0.0"
+  },
+  "dependencies": {},
+  "peerDependencies": {},
+  "devDependencies": {
+    "justo": "*"
+  },
+  "files": [],
+  "scripts": {
+    "test": "justo test"
+  }
+}
