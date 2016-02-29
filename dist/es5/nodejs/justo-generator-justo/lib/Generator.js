@@ -33,6 +33,7 @@
 
 
 
+
     {
       _get(Object.getPrototypeOf(_class.prototype), "init", this).call(this);} }, { key: "fin", value: function fin() 
 
@@ -57,8 +58,10 @@
     answers) {
       this.copy("Justo.js");
       this.copy("Justo.json");
-      this.template("_package.json", "package.json", { 
-        desc: answers.desc, 
-        author: answers.author, 
-        authorName: answers.authorName, 
-        authorUrl: answers.authorUrl });} }, { key: "help", get: function get() {return { desc: "Generate the files of a Justo.js project.", params: { desc: "Project description.", author: "Author name.", authorEmail: "Author email.", authorUrl: "Author URL." }, commands: {} };} }]);return _class;}(_justoGenerator.Generator);exports.default = _class;
+
+      if (answers.packagejson === undefined || answers.packagejson) {
+        this.template("_package.json", "package.json", { 
+          desc: answers.desc, 
+          author: answers.author, 
+          authorName: answers.authorName, 
+          authorUrl: answers.authorUrl });}} }, { key: "help", get: function get() {return { desc: "Generate the files of a Justo.js project.", params: { desc: "Project description.", author: "Author name.", authorEmail: "Author email.", authorUrl: "Author URL.", packagejson: "Generate the package.json file: true or false. Default: true." }, commands: {} };} }]);return _class;}(_justoGenerator.Generator);exports.default = _class;

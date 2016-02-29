@@ -31,10 +31,26 @@ suite("Generator", function() {
       DST_DIR.remove();
     });
 
-    test("generate(answers)", function() {
+    test("generate(answers) - packagejson not specified", function() {
       gen.generate({desc: "This is the description", author: "This is the author name"});
 
       file(DST, "package.json").must.exist();
+      file(DST, "Justo.js").must.exist();
+      file(DST, "Justo.json").must.exist();
+    });
+
+    test("generate(answers) - packagejson:true", function() {
+      gen.generate({desc: "This is the description", author: "This is the author name", packagejson: true});
+
+      file(DST, "package.json").must.exist();
+      file(DST, "Justo.js").must.exist();
+      file(DST, "Justo.json").must.exist();
+    });
+
+    test("generate(answers) - packagejson:false", function() {
+      gen.generate({desc: "This is the description", author: "This is the author name", packagejson: false});
+
+      file(DST, "package.json").must.not.exist();
       file(DST, "Justo.js").must.exist();
       file(DST, "Justo.json").must.exist();
     });
