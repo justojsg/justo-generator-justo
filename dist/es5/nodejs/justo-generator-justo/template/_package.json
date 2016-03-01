@@ -1,12 +1,12 @@
 {
-  "name": "${dir.name}",
+  "name": "{{dir.name}}",
   "version": "0.1.0",
-  "description": "${scope.desc}",
+  "description": "{{scope.desc}}",
   "homepage": "",
   "author": {
-    "name": "${scope.author}",
-    "email": "${scope.authorEmail}",
-    "url": "${scope.authorUrl}"
+    "name": "{{scope.author}}",
+    "email": "{{scope.authorEmail}}",
+    "url": "{{scope.authorUrl}}"
   },
   "keywords": [],
   "bugs": {
