@@ -40,7 +40,7 @@ suite("Generator", function() {
     });
 
     test("generate(answers) - packagejson:true", function() {
-      gen.generate({desc: "This is the description", author: "This is the author name", packagejson: true});
+      gen.generate({desc: "This is the description", author: "This is the author name", packagejson: "true"});
 
       file(DST, "package.json").must.exist();
       file(DST, "Justo.js").must.exist();
@@ -48,7 +48,7 @@ suite("Generator", function() {
     });
 
     test("generate(answers) - packagejson:false", function() {
-      gen.generate({desc: "This is the description", author: "This is the author name", packagejson: false});
+      gen.generate({desc: "This is the description", author: "This is the author name", packagejson: "false"});
 
       file(DST, "package.json").must.not.exist();
       file(DST, "Justo.js").must.exist();

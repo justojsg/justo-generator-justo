@@ -59,7 +59,7 @@
       this.copy("Justo.js");
       this.copy("Justo.json");
 
-      if (answers.packagejson === undefined || answers.packagejson) {
+      if (answers.packagejson === undefined || answers.packagejson == "true" || answers.packagejson === true) {
         this.template("_package.json", "package.json", { 
           desc: answers.desc, 
           author: answers.author, 
