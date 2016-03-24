@@ -2,11 +2,11 @@
   "name": "{{dir.name}}",
   "version": "0.1.0",
   "description": "{{scope.desc}}",
-  "homepage": "",
+  "homepage": "{{http scope.homepage}}",
   "author": {
     "name": "{{scope.author}}",
     "email": "{{scope.authorEmail}}",
-    "url": "{{scope.authorUrl}}"
+    "url": "{{http scope.authorUrl}}"
   },
   "keywords": [],
   "bugs": {
