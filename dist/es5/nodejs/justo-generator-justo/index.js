@@ -1,1 +1,3 @@
-"use strict";module.exports = require("./lib/Generator.js").default;
+"use strict";module.exports = { 
+  "default": require("./lib/Generator").default, 
+  "add suite": require("./lib/AddSuiteGenerator").default };

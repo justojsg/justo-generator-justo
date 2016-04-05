@@ -3,11 +3,11 @@ const path = require("path");
 const Dir = require("justo-fs").Dir;
 const file = require("justo-assert-fs").file;
 const dir = require("justo-assert-fs").dir;
-const Generator = require("../../../dist/es5/nodejs/justo-generator-justo").default;
 const suite = require("justo").suite;
 const test = require("justo").test;
 const init = require("justo").init;
 const fin = require("justo").fin;
+const Generator = require("../../../dist/es5/nodejs/justo-generator-justo")["add suite"];
 
 //suite
 suite("Generator", function() {
@@ -31,20 +31,9 @@ suite("Generator", function() {
       DST_DIR.remove();
     });
 
-    test("generate(answers) - packagejson:true", function() {
-      gen.generate({desc: "This is the description", author: "This is the author name", packagejson: "true"});
-
-      file(DST, "package.json").must.exist();
-      file(DST, "Justo.js").must.exist();
-      file(DST, "Justo.json").must.exist();
-    });
-
-    test("generate(answers) - packagejson:false", function() {
-      gen.generate({desc: "This is the description", author: "This is the author name", packagejson: "false"});
-
-      file(DST, "package.json").must.not.exist();
-      file(DST, "Justo.js").must.exist();
-      file(DST, "Justo.json").must.exist();
+    test("generate(answers)", function() {
+      gen.generate({name: "MySuite", overwrite: true});
+      file(gen.dst, "test/unit/lib/MySuite.js").must.exist();
     });
   });
 })();
