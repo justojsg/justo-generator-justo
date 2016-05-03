@@ -32,6 +32,16 @@ var _justoGenerator = require("justo-generator");function _classCallCheck(instan
 
 
 
+
+
+
+
+
+
+
+
+
+
     {
       _get(Object.getPrototypeOf(_class.prototype), "init", this).call(this);} }, { key: "fin", value: function fin() 
 
@@ -40,19 +50,50 @@ var _justoGenerator = require("justo-generator");function _classCallCheck(instan
 
 
     {
-      _get(Object.getPrototypeOf(_class.prototype), "fin", this).call(this);} }, { key: "prompt", value: function prompt(
+      _get(Object.getPrototypeOf(_class.prototype), "fin", this).call(this);} }, { key: "preprompt", value: function preprompt() 
+
+
+
+
+
+    {} }, { key: "prompt", value: function prompt(
+
 
 
 
 
 
     answers) {
+      if (this.confirm("standalone") && !this.responses.hasOwnProperty("packagejson")) this.responses.packagejson = true;
       if (this.confirm("packagejson")) {
         this.input("desc");
         this.input("homepage");
         if (this.input("author")) {
           this.input("authorEmail");
-          this.input("authorUrl");}}} }, { key: "generate", value: function generate(
+          this.input("authorHomepage");}
+
+        if (this.input("contributor")) {
+          this.input("contributorEmail");
+          this.input("contributorHomepage");}
+
+        this.input("gitUrl");
+        this.input("bugsHomepage");
+        this.input("bugsEmail");}} }, { key: "pregenerate", value: function pregenerate(
+
+
+
+
+
+
+    answers) {
+      if (answers.standalone) {
+        var entries = this.getEntryNames(".").sort();
+
+        if (!(entries.length === 0 || 
+        entries.length == 1 && entries[0] == ".git" || 
+        entries.length == 2 && entries[0] == ".git" && entries[1] == "README.md")) 
+        {
+          return "Destination dir is not empty.";}}} }, { key: "generate", value: function generate(
 
 
 
@@ -61,6 +102,12 @@ var _justoGenerator = require("justo-generator");function _classCallCheck(instan
 
 
     answers) {
-      this.copy("Justo.js");
+      this.copyIf(answers.standalone, "_editorconfig", ".editorconfig");
+      this.copyIf(answers.standalone, "_gitignore", ".gitignore");
+      this.copyIf(answers.standalone, "_jshintrc", ".jshintrc");
+      this.templateIf(answers.packagejson, "_package.json", "package.json", answers);
+      this.copyIf(answers.standalone, "_travis.yml", ".travis.yml");
+      this.copyIf(answers.standalone, "index.js");
+      this.template("Justo.js", answers);
       this.copy("Justo.json");
-      this.templateIf(answers.packagejson, "_package.json", "package.json", answers);} }, { key: "desc", get: function get() {return "Generate the files of a Justo.js project.";} }, { key: "params", get: function get() {return { desc: "Project description", homepage: "Project homepage", author: "Author name", authorEmail: "Author email", authorUrl: "Author homepage", packagejson: { title: "Generate the package.json file?", type: "Boolean" } };} }]);return _class;}(_justoGenerator.HandlebarsGenerator);exports.default = _class;
+      this.templateIf(answers.standalone, "README.md", answers);} }, { key: "desc", get: function get() {return "Generate the files of a Justo.js project.";} }, { key: "params", get: function get() {return { standalone: { title: "Standalone?", type: "Boolean" }, desc: "Project description", homepage: "Project homepage", author: "Author name", authorEmail: "Author email", authorHomepage: "Author homepage", contributor: "Contributor name", contributorEmail: "Contributor email", contributorHomepage: "Contributor homepage", gitUrl: "Git repository URL", bugsHomepage: "Bugs homepage", bugsEmail: "Bugs email", packagejson: { title: "Generate the package.json file?", type: "Boolean" } };} }]);return _class;}(_justoGenerator.HandlebarsGenerator);exports.default = _class;

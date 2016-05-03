@@ -31,7 +31,21 @@ suite("Generator", function() {
       DST_DIR.remove();
     });
 
-    test("generate(answers) - packagejson:true", function() {
+    test("generate(answers) - standalone project", function() {
+      gen.generate({desc: "This is the description", author: "This is the author name", standalone: true, packagejson: "true"});
+
+      file(DST, ".editorconfig").must.exist();
+      file(DST, ".gitignore").must.exist();
+      file(DST, ".jshintrc").must.exist();
+      file(DST, "package.json").must.exist();
+      file(DST, ".travis.yml").must.exist();
+      file(DST, "index.js").must.exist();
+      file(DST, "Justo.js").must.exist();
+      file(DST, "Justo.json").must.exist();
+      file(DST, "README.md").must.exist();
+    });
+
+    test("generate(answers) - embedded with packagejson = true", function() {
       gen.generate({desc: "This is the description", author: "This is the author name", packagejson: "true"});
 
       file(DST, "package.json").must.exist();
@@ -39,7 +53,7 @@ suite("Generator", function() {
       file(DST, "Justo.json").must.exist();
     });
 
-    test("generate(answers) - packagejson:false", function() {
+    test("generate(answers) - embedded with packagejson = false", function() {
       gen.generate({desc: "This is the description", author: "This is the author name", packagejson: "false"});
 
       file(DST, "package.json").must.not.exist();

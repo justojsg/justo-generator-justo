@@ -6,24 +6,44 @@
   "author": {
     "name": "{{scope.author}}",
     "email": "{{scope.authorEmail}}",
-    "url": "{{http scope.authorUrl}}"
+    "url": "{{http scope.authorHomepage}}"
   },
+  "contributors": [
+    {
+      "name": "{{scope.contributor}}",
+      "email": "{{scope.contributorEmail}}",
+      "url": "{{http scope.contributorHomepage}}"
+    }
+  ],
   "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "{{scope.gitUrl}}"
+  },
   "bugs": {
-    "url": "",
-    "email": ""
+    "url": "{{http scope.bugsHomepage}}",
+    "email": "{{scope.bugsEmail}}"
   },
   "engines": {
     "node": ">=5.0.0",
     "npm": ">=3.0.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    {{#if scope.standalone}}
+    "justo": "*"
+    {{/if}}
+  },
   "peerDependencies": {},
   "devDependencies": {
-    "justo": "*"
+    {{#unless scope.standalone}}
+    "justo": "*",
+    {{/unless}}
+    "justo-plugin-jshint": "*"
   },
+  "main": "index.js",
   "files": [],
   "scripts": {
     "test": "justo test"
-  }
+  },
+  "preferGlobal": false
 }
