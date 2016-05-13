@@ -1,11 +1,11 @@
 {
   "name": "justo-generator-justo",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Generator for a Justo.js project.",
   "homepage": "http://justojs.org",
   "author": {
     "name": "Justo Labs",
-    "email": "justojs@justolabs.com",
+    "email": "info@justolabs.com",
     "url": "http://justojs.org"
   },
   "contributors": [
