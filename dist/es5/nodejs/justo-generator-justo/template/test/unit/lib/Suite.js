@@ -7,5 +7,5 @@ const fin = justo.fin;
 
 //suite
 suite("{{scope.name}}", function() {
-  
+
 })();

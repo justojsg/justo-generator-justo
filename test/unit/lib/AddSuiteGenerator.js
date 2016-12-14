@@ -1,8 +1,6 @@
 //imports
-const path = require("path");
 const Dir = require("justo-fs").Dir;
 const file = require("justo-assert-fs").file;
-const dir = require("justo-assert-fs").dir;
 const suite = require("justo").suite;
 const test = require("justo").test;
 const init = require("justo").init;

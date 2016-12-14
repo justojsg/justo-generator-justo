@@ -25,25 +25,30 @@
     "email": "{{scope.bugsEmail}}"
   },
   "engines": {
-    "node": ">=5.0.0",
+    "node": ">=7.0.0",
     "npm": ">=3.0.0"
   },
   "dependencies": {
-    {{#if scope.standalone}}
+    {{#if (eq scope.type "Standalone")}}
     "justo": "*"
     {{/if}}
   },
-  "peerDependencies": {},
   "devDependencies": {
-    {{#unless scope.standalone}}
+    {{#if (ne scope.type "Standalone")}}
     "justo": "*",
-    {{/unless}}
+    {{/if}}
+    {{#if (eq scope.linter "ESLint")}}
+    "justo-plugin-eslint": "*"
+    {{/if}}
+    {{#if (eq scope.linter "JSHint")}}
     "justo-plugin-jshint": "*"
+    {{/if}}
   },
   "main": "index.js",
-  "files": [],
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "test": "justo test"
-  },
-  "preferGlobal": false
+  }
 }

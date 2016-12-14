@@ -10,7 +10,7 @@ Generator for a *Justo.js* project.
 ## Install
 
 ```
-npm install -g justo-generator-justo
+npm install -g justo-cli justo-generator-justo
 ```
 
 ## Note

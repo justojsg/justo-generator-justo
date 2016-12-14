@@ -1,11 +1,11 @@
 {
   "name": "justo-generator-justo",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Generator for a Justo.js project.",
   "homepage": "http://justojs.org",
   "author": {
     "name": "Justo Labs",
-    "email": "info@justolabs.com",
+    "email": "hello@justolabs.com",
     "url": "http://justojs.org"
   },
   "contributors": [
@@ -43,8 +43,8 @@
     "justo-assert-fs": "*",
     "justo-fs": "*",
     "justo-plugin-babel": "*",
+    "justo-plugin-eslint": "*",
     "justo-plugin-fs": "*",
-    "justo-plugin-jshint": "*",
     "justo-plugin-npm": "*"
   },
   "preferGlobal": true,
