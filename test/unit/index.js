@@ -12,4 +12,8 @@ suite("index", function() {
   test("add suite", function() {
     pkg["add suite"].must.be.instanceOf(Function);
   });
+
+  test("module", function() {
+    pkg["module"].must.be.instanceOf(Function);
+  });
 })();

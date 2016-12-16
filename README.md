@@ -13,6 +13,20 @@ Generator for a *Justo.js* project.
 npm install -g justo-cli justo-generator-justo
 ```
 
-## Note
+## Embedded Justo
 
-If *standalone*, the directory must be empty or it can have `.git` and `README.md`.
+To create the *Justo* files into an existing project:
+
+```
+justo -g justo
+```
+
+## Justo module
+
+To create the scaffold for a *Justo* module:
+
+```
+justo -g justo module
+```
+
+Note. The directory must be empty or it can have `.git` and `README.md`.

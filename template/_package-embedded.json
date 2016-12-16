@@ -1,5 +1,5 @@
 {
-  "name": "{{dir.name}}",
+  "name": "{{scope.name}}",
   "version": "0.1.0",
   "description": "{{scope.desc}}",
   "homepage": "{{http scope.homepage}}",
@@ -18,33 +18,23 @@
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "{{scope.gitUrl}}"
+    "url": ""
   },
   "bugs": {
-    "url": "{{http scope.bugsHomepage}}",
-    "email": "{{scope.bugsEmail}}"
+    "url": "",
+    "email": ""
   },
   "engines": {
     "node": ">=7.0.0",
     "npm": ">=3.0.0"
   },
   "dependencies": {
-    {{#if (eq scope.type "Standalone")}}
-    "justo": "*"
-    {{/if}}
+
   },
   "devDependencies": {
-    {{#if (ne scope.type "Standalone")}}
     "justo": "*",
-    {{/if}}
-    {{#if (eq scope.linter "ESLint")}}
-    "justo-plugin-eslint": "*"
-    {{/if}}
-    {{#if (eq scope.linter "JSHint")}}
-    "justo-plugin-jshint": "*"
-    {{/if}}
   },
-  "main": "index.js",
+  "main": "Justo.js",
   "files": [
     "lib"
   ],

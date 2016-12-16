@@ -4,29 +4,43 @@ const catalog = justo.catalog;
 const babel = require("justo-plugin-babel");
 const copy = require("justo-plugin-fs").copy;
 const clean = require("justo-plugin-fs").clean;
-const eslint = require("justo-plugin-eslint");
 const npm = require("justo-plugin-npm");
+{{#if (eq scope.linter "JSHint")}}
+const jslinter = require("justo-plugin-jshint");
+{{else if (eq scope.linter "ESLint")}}
+const jslinter = require("justo-plugin-eslint");
+{{/if}}
 
 //catalog
+{{#if (in scope.linter "ESLint" "JSHint")}}
 const jslint = catalog.simple({
-  name: "lint",
-  desc: "Parse source code.",
-  task: eslint,
+  name: "jslint",
+  desc: "Parse best practices and grammar (JavaScript).",
+  task: jslinter,
   params: {
     output: true,
     src: [
       "index.js",
       "Justo.js",
       "lib/",
-      "test/unit/index.js",
-      "test/unit/lib/"
     ]
   }
 });
 
-catalog.workflow({name: "build", desc: "Build the package"}, function() {
+{{/if}}
+catalog.workflow({name: "build", desc: "Build the package."}, function(params) {
+  var newDist = false;
+
+  //(1) params
+  for (let param of params) {
+    if (param == "new") newDist = true;
+  }
+
+  //(2) tasks
+  {{#if (in scope.linter "ESLint" "JSHint")}}
   jslint("Best practices and grammar (JavaScript)");
 
+  {{/if}}
   clean("Remove build directory", {
     dirs: ["build/es5"]
   });
@@ -49,22 +63,18 @@ catalog.workflow({name: "build", desc: "Build the package"}, function() {
     "Create package",
     {
       src: "build/es5/index.js",
-      dst: "dist/es5/nodejs/justo-generator-justo/"
+      dst: "dist/es5/nodejs/{{scope.name}}/"
     },
     {
       src: "build/es5/lib/",
-      dst: "dist/es5/nodejs/justo-generator-justo/lib"
+      dst: "dist/es5/nodejs/{{scope.name}}/lib",
+      force: true
     },
     {
-      src: ["package.json", "README.md", "template/"],
-      dst: "dist/es5/nodejs/justo-generator-justo/"
+      src: ["package.json", "README.md", "Justo.js"],
+      dst: "dist/es5/nodejs/{{scope.name}}/"
     }
   );
-});
-
-catalog.macro({name: "test", desc: "Unit testing"}, {
-  require: "justo-assert",
-  src: ["test/unit/index.js", "test/unit/lib/"]
 });
 
 catalog.simple({
@@ -72,20 +82,20 @@ catalog.simple({
   desc: "NPM publish.",
   task: npm.publish,
   params: {
-    who: "justojs",
-    src: "dist/es5/nodejs/justo-generator-justo"
+    who: "{{scope.npmWho}}",
+    src: "dist/es5/nodejs/{{scope.name}}"
   }
 });
 
 catalog.simple({
   name: "install",
-  desc: "Install the generator to test.",
-  title: "Install generator globally",
+  desc: "Install the module globally for testing.",
   task: npm.install,
   params: {
-    pkg: "dist/es5/nodejs/justo-generator-justo/",
-    global: true
+    pkg: "./dist/es5/nodejs/{{scope.name}}",
+    global: true,
+    output: false
   }
 });
 
-catalog.macro({name: "default", desc: "Build and test."}, ["build", "test"]);
+catalog.macro({name: "default", desc: "Build the Justo module."}, ["build"]);

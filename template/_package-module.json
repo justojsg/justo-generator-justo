@@ -1,0 +1,85 @@
+{
+  "name": "{{scope.name}}",
+  "version": "0.1.0",
+  "description": "{{scope.desc}}",
+  "homepage": "{{http scope.homepage}}",
+  "author": {
+    "name": "{{scope.author}}",
+    "email": "{{scope.authorEmail}}",
+    "url": "{{http scope.authorHomepage}}"
+  },
+  "contributors": [
+    {
+      "name": "{{scope.contributor}}",
+      "email": "{{scope.contributorEmail}}",
+      "url": "{{http scope.contributorHomepage}}"
+    }
+  ],
+  "keywords": [
+    "Justo",
+    "Justo.js",
+    "justo-module"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "{{scope.gitUrl}}"
+  },
+  "bugs": {
+    "url": "{{http scope.bugsHomepage}}",
+    "email": "{{scope.bugsEmail}}"
+  },
+  "engines": {
+    "node": ">=7.0.0",
+    "npm": ">=3.0.0"
+  },
+  "dependencies": {
+    {{#if (contain scope.dependencies "getos")}}
+    "getos": "*",
+    {{/if}}
+    "justo": "*",
+    {{#if (contain scope.dependencies "justo-sync")}}
+    "justo-sync": "*",
+    {{/if}}
+    {{#if (contain scope.dependencies "justo-plugin-apt")}}
+    "justo-plugin-apt": "*",
+    {{/if}}
+    {{#if (contain scope.dependencies "justo-plugin-cli")}}
+    "justo-plugin-cli": "*",
+    {{/if}}
+    {{#if (contain scope.dependencies "justo-plugin-download")}}
+    "justo-plugin-download": "*",
+    {{/if}}
+    "justo-plugin-fs": "*",
+    {{#if (contain scope.dependencies "justo-plugin-handlebars")}}
+    "justo-plugin-handlebars": "*",
+    {{/if}}
+    {{#if (contain scope.dependencies "justo-plugin-tar")}}
+    "justo-plugin-tar": "*",
+    {{/if}}
+    {{#if (contain scope.dependencies "justo-plugin-unzip")}}
+    "justo-plugin-unzip": "*",
+    {{/if}}
+    {{#if (contain scope.dependencies "justo-plugin-zip")}}
+    "justo-plugin-zip": "*",
+    {{/if}}
+    "justo-plugin-npm": "*"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "*",
+    {{#if (eq scope.linter "ESLint")}}
+    "justo-plugin-eslint": "*",
+    {{/if}}
+    {{#if (eq scope.linter "JSHint")}}
+    "justo-plugin-jshint": "*",
+    {{/if}}
+    "justo-plugin-babel": "*"
+  },
+  "main": "index.js",
+  "files": [
+    "lib",
+    "Justo.js"
+  ],
+  "scripts": {
+    "test": "justo test"
+  }
+}
