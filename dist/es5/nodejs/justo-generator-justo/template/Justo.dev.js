@@ -22,6 +22,7 @@ const jslint = catalog.simple({
     src: [
       "index.js",
       "Justo.js",
+      "Justo.dev.js",
       "lib/",
     ]
   }
