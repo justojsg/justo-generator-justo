@@ -55,9 +55,11 @@ catalog.workflow({name: "build", desc: "Build the package."}, function(params) {
     ]
   });
 
-  clean("Remove dist directory", {
-    dirs: ["dist/es5"]
-  });
+  if (newDist) {
+    clean("Remove dist directory", {
+      dirs: ["dist/es5"]
+    });
+  }
 
   copy(
     "Create package",
